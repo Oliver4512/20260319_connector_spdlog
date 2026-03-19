@@ -18,7 +18,7 @@ int main (int argc, char *argv[])
   else 
   {
     std::cerr << "Error: Could not open pw.txt" << std::endl;
-    return 1;
+    //return 1;
   }
   try 
   {
