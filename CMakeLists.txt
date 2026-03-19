@@ -20,9 +20,9 @@ endif()
 
 
 # --- APP ---
-add_executable(mqtt_sub ./mariaDBinsert.cpp)
-#target_include_directories(mqtt_sub PUBLIC src ${MARIADBCPP_INCLUDE_DIR})
-target_link_libraries(mqtt_sub PRIVATE PahoMqttCpp::paho-mqttpp3 PahoMqttCpp::paho-mqttpp3 ${MARIADBCPP_LIB}  spdlog::spdlog)
+add_executable(exec ./mariaDBinsert.cpp)
+#target_include_directories(exec PUBLIC src ${MARIADBCPP_INCLUDE_DIR})
+target_link_libraries(exec PRIVATE PahoMqttCpp::paho-mqttpp3 PahoMqttCpp::paho-mqttpp3 ${MARIADBCPP_LIB}  spdlog::spdlog)
 
 
 # sudo systemctl stop mariadb

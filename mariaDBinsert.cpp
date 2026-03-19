@@ -1,9 +1,15 @@
 #include <mariadb/conncpp.hpp>
-//#include "spdlog/spdlog.h"
+#include "spdlog/spdlog.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
+
+#if __has_include("pass.hpp")
+    #include "pass.hpp"
+#else
+    std::string pass = "password";
+#endif
 
 int main (int argc, char *argv[])
 {
@@ -20,6 +26,7 @@ int main (int argc, char *argv[])
     std::cerr << "Error: Could not open pw.txt" << std::endl;
     //return 1;
   }
+  
   try 
   {
     sql::Driver* driver=sql::mariadb::get_driver_instance();
