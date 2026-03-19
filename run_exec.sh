@@ -1,3 +1,3 @@
 #! /bin/sh
 
-cd out/build ; ./exec
+cd out/build ; ./mqtt_sub
