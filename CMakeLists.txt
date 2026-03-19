@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(MQTT_Project)
+project(CMAKE_CURRENT_LIST_DIR)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # 1. Find Paho pakken på systemet
 # Dette erstatter både find_library og find_path
 find_package(PahoMqttCpp REQUIRED)
+find_package(spdlog REQUIRED)
 
 # Find biblioteket manuelt
 find_library(MARIADBCPP_LIB NAMES mariadbcpp)
@@ -20,5 +21,9 @@ endif()
 
 # --- APP ---
 add_executable(mqtt_sub ./mariaDBinsert.cpp)
-target_include_directories(mqtt_sub PUBLIC src ${MARIADBCPP_INCLUDE_DIR})
-target_link_libraries(mqtt_sub PRIVATE PahoMqttCpp::paho-mqttpp3 PahoMqttCpp::paho-mqttpp3 ${MARIADBCPP_LIB})
+#target_include_directories(mqtt_sub PUBLIC src ${MARIADBCPP_INCLUDE_DIR})
+target_link_libraries(mqtt_sub PRIVATE PahoMqttCpp::paho-mqttpp3 PahoMqttCpp::paho-mqttpp3 ${MARIADBCPP_LIB}  spdlog::spdlog)
+
+
+# sudo systemctl stop mariadb
+# mariadb_safe skip-safe-tables
