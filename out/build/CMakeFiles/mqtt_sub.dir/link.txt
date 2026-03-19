@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/mqtt_sub.dir/link.d CMakeFiles/mqtt_sub.dir/mariaDBinsert.cpp.o -o mqtt_sub  -Wl,-rpath,/usr/local/lib /usr/local/lib/libpaho-mqttpp3.so.1.6.0 /usr/lib/libmariadbcpp.so /usr/local/lib/libpaho-mqtt3as.so.1.3.16 /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libcrypto.so -lc -ldl -lpthread -lrt -lanl

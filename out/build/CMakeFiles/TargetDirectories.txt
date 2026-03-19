@@ -1,3 +1,0 @@
-/home/oliver/code/20260319_connector_spdlog/out/build/CMakeFiles/mqtt_sub.dir
-/home/oliver/code/20260319_connector_spdlog/out/build/CMakeFiles/edit_cache.dir
-/home/oliver/code/20260319_connector_spdlog/out/build/CMakeFiles/rebuild_cache.dir
