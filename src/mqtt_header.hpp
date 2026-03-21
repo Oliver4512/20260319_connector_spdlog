@@ -1,5 +1,98 @@
 
-#include "functions.hpp"
+#include "mqtt/async_client.h"
+#include <random>
+#include <algorithm>
+
+// Function generates a semi random client id to avoid blocking from same id
+std::string generate_client_id(const std::string &prefix)
+{
+    const std::string chars = "0123456789abcdefghijklmnopqrstuvwxyz";
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<> distribution(0, chars.size() - 1);
+
+    std::string id = prefix + "_";
+    for (int i = 0; i < 8; ++i)
+    {
+        id += chars[distribution(generator)];
+    }
+    std::cout << id << std::endl;
+    return id;
+}
+
+const std::string CLIENT_ID = generate_client_id("paho_cpp");
+
+
+
+void handleMessage(const mqtt::const_message_ptr msg, sql::Connection *testDb)
+{
+    std::string topic = msg->get_topic();
+    std::string payload = msg->to_string();
+
+    if (topic == "calc/median_temperature")
+    {
+        saveToDatabase(testDb, "temperature_test", topic, payload);
+    }
+    /*     else if (topic == "CO2_SCD40/CO2ppm")
+        {
+            saveToDatabase(testDb, "co2", topic, payload);
+        }
+        else if (topic == "CO2_SCD40/humidity")
+        {
+            saveToDatabase(testDb, "humidity", topic, payload);
+        }
+        else if (topic == "bmp_forced/pressure")
+        {
+            saveToDatabase(testDb, "pressure", topic, payload);
+        }
+        else if (topic == "ens160/tvoc")
+        {
+            saveToDatabase(testDb, "tvoc", topic, payload);
+        }
+        else if (topic == "mq_manual/air_quality_original")
+        {
+            saveToDatabase(testDb, "airq", topic, payload);
+        } */
+    else
+    {
+        std::cout << "Unknown topic received: " << topic << std::endl;
+        // saveToDatabase(testDb, "log", topic, payload);
+    }
+}
+
+
+// Callbacks for the success or failures of requested actions.
+// This could be used to initiate further action, but here we just log the
+// results to the console.
+
+class action_listener : public virtual mqtt::iaction_listener
+{
+    std::string name_;
+
+    void on_failure(const mqtt::token &tok) override
+    {
+        std::cout << name_ << " failure";
+        if (tok.get_message_id() != 0)
+            std::cout << " for token: [" << tok.get_message_id() << "]" << std::endl;
+        std::cout << std::endl;
+    }
+
+    void on_success(const mqtt::token &tok) override
+    {
+        std::cout << name_ << " success";
+        if (tok.get_message_id() != 0)
+            std::cout << " for token: [" << tok.get_message_id() << "]" << std::endl;
+        auto top = tok.get_topics();
+        if (top && !top->empty())
+            std::cout << "\ttoken topic: '" << (*top)[0] << "', ..." << std::endl;
+        std::cout << std::endl;
+    }
+
+public:
+    action_listener(const std::string &name) : name_(name) {}
+};
+
+
 
 /**
  * Local callback & listener class for use with the client connection.

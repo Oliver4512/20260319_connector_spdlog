@@ -1,5 +1,17 @@
+// #include <cctype>
+// #include <chrono>
+// #include <cstdlib>
+// #include <cstring>
+// #include <iostream>
+// #include <string>
+// #include <thread>
 
- #include "classes.hpp"
+#include <string>
+#include <iostream>
+
+#include "mariadb_header.hpp"
+#include "mqtt_header.hpp"
+
 
 int main(int argc, char *argv[])
 {

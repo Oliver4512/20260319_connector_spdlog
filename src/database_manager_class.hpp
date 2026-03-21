@@ -3,10 +3,8 @@
 #define database_manager_hpp
 
 #include <mariadb/conncpp.hpp>
-#include <memory>
-#include <map>
-#include <string>
-#include <iostream>
+//#include <memory>
+//#include <map>
 
 class DatabaseManager {
 public:
