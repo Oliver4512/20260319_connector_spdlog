@@ -43,7 +43,8 @@ private:
             sql::Properties properties({{"user", user}, {"password", pass}});
             
             std::unique_ptr<sql::Connection> conn(driver->connect(url, properties));
-            std::cout << "Successfully connected to: " << url << " as " << user << std::endl;
+            std::cout << "Maybe Successfully connected to: " << url << " as " << user << std::endl;
+            std::cout << "Test with wrong password to get access denied error, for debugging" << std::endl;
             return conn;
         }
         catch (sql::SQLException& e) {
