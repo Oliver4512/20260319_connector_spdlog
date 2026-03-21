@@ -7,11 +7,11 @@
 #if __has_include("pass.hpp")
 #include "pass.hpp"
 #else
-std::string pass = "password";
+#define db_password dbpassword
 #endif
 
 // pass is refering to hidden variable with password
-sql::Connection *testDb = DatabaseManager::getConnection("jdbc:mariadb://localhost:3306/testdb", "oliver", pass);
+sql::Connection *testDb = DatabaseManager::getConnection(dbname, dbuser, db_password);
 
 using namespace std;
 

@@ -6,12 +6,15 @@
 // #include <string>
 // #include <thread>
 
+#define dbname "jdbc:mariadb://localhost:3306/testdb"
+#define dbuser "oliver"
+#define dbpassword "password"
+
 #include <string>
 #include <iostream>
 
 #include "mariadb_header.hpp"
 #include "mqtt_header.hpp"
-
 
 int main(int argc, char *argv[])
 {
